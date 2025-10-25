@@ -2,7 +2,7 @@
 
 [project]
 name = "harold"
-license = {file = "LICENSE.txt"}
+license = {file = "LICENSE"}
 description = "An open-source systems and controls toolbox for Python3."
 
 maintainers = [
@@ -95,7 +95,7 @@ scipy = "^1.8.0"
 matplotlib = "^3.4.0"
 tabulate = "^0.8.9"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^6.0.0"
 flake8 = "^4.0.1"
 
