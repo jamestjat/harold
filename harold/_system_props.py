@@ -1,6 +1,5 @@
 import numpy as np
 from numpy import block
-from numpy.linalg import _makearray
 from scipy.linalg import solve, norm, eigvals, qr
 
 from ._array_validators import _assert_2d, _assert_square, _assert_finite
@@ -210,8 +209,8 @@ def controllability_indices(A, B, tol=None):
     .. [1] : W.M. Wonham, "Linear Multivariable Control: A Geometric Approach",
         3rd edition, 1985, Springer, ISBN:9780387960715
     """
-    a, _ = _makearray(A)
-    b, _ = _makearray(B)
+    a = np.asarray(A)
+    b = np.asarray(B)
     _assert_2d(a, b)
     _assert_finite(a, b)
     _assert_square(a)
