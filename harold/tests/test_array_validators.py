@@ -16,5 +16,5 @@ def test_assert_2d():
 
 
 def test_assert_finite():
-    a, b = np.array([[1, 2, np.NaN]]), np.eye(2)
+    a, b = np.array([[1, 2, np.nan]]), np.eye(2)
     assert_raises(LinAlgError, _assert_finite, a, b)

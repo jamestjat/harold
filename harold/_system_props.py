@@ -1,6 +1,6 @@
 import numpy as np
 from numpy import block
-from numpy.linalg.linalg import _makearray
+from numpy.linalg import _makearray
 from scipy.linalg import solve, norm, eigvals, qr
 
 from ._array_validators import _assert_2d, _assert_square, _assert_finite
@@ -72,7 +72,7 @@ def system_norm(G, p=np.inf, hinf_tol=1e-6, eig_tol=1e-8):
     if p == 2:
         # Handle trivial infinities
         if not np.allclose(T.d, np.zeros_like(T.d)) or (not T._isstable):
-            return np.Inf
+            return np.inf
 
         if T.SamplingSet == 'R':
             x = lyapunov_eq_solver(a.T, b @ b.T)
@@ -83,7 +83,7 @@ def system_norm(G, p=np.inf, hinf_tol=1e-6, eig_tol=1e-8):
     # ∞-norm
     elif np.isinf(p):
         if not T._isstable:
-            return np.Inf
+            return np.inf
 
         # Initial gamma0 guess
         # Get the max of the largest svd of either

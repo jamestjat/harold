@@ -2753,7 +2753,7 @@ def _pole_properties(poles, dt=None, output_data=False):
 
     nz_p = np.logical_not(z_p)
     freqn[z_p] = 0
-    damp[z_p] = np.NaN
+    damp[z_p] = np.nan
 
     if dt is not None:
         p[nz_p] = np.log(p[nz_p])/dt
