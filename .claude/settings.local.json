@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(done)",
+      "Bash(python -m pytest:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(uv run python:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(python:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(ruff check:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

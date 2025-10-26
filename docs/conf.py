@@ -9,7 +9,6 @@ import os
 import subprocess
 import mock
 import cloud_sptheme as csp
-import numpydoc
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -25,8 +24,6 @@ MOCK_MODULES = [
 
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
-
-import harold
 
 # Readthedocs doesn't support setup.py execution hence we replicate
 # the version retrieval here -- ilayn
