@@ -1067,8 +1067,9 @@ class Transfer:
                 den_entries = sum(self._den, [])
 
                 for x in range(self._p * self._m):
-                    num_arr[x] = num_entries[x]
-                    num_arr[x] /= den_entries[x]
+                    num_val = np.asarray(num_entries[x]).item()
+                    den_val = np.asarray(den_entries[x]).item()
+                    num_arr[x] = num_val / den_val
 
                 return num_arr.reshape(self._p, self._m)
         else:
@@ -2964,7 +2965,9 @@ def transfer_to_state(G, output='system'):
             D = np.empty((p, m), dtype=float)
             for rows in range(p):
                 for cols in range(m):
-                    D[rows, cols] = num[rows][cols]/den[rows][cols]
+                    num_val = np.asarray(num[rows][cols]).item()
+                    den_val = np.asarray(den[rows][cols]).item()
+                    D[rows, cols] = num_val / den_val
         else:
             D = num/den
 
@@ -3021,7 +3024,7 @@ def transfer_to_state(G, output='system'):
                 nn, nd = datanum.size, dataden.size
 
                 if nd == 1:  # Case 4 : nn should also be 1.
-                    D[x, y] = datanum/dataden if nn > 0 else 0.
+                    D[x, y] = (datanum/dataden).item() if nn > 0 else 0.
                     num[x][y] = np.array([0.])
 
                 elif nd > nn:  # Case 2 : D[x,y] is trivially zero
@@ -3033,13 +3036,13 @@ def transfer_to_state(G, output='system'):
 
                     # Case 3: If all cancelled datanum is returned empty
                     if np.count_nonzero(datanum) == 0:
-                        D[x, y] = NumOrEmpty
+                        D[x, y] = NumOrEmpty.item() if NumOrEmpty.size == 1 else NumOrEmpty[0]
                         num[x][y] = np.array([[0.]])
                         den[x][y] = np.array([[1.]])
 
                     # Case 1: Proper case
                     else:
-                        D[x, y] = NumOrEmpty
+                        D[x, y] = NumOrEmpty.item() if NumOrEmpty.size == 1 else NumOrEmpty[0]
                         num[x][y] = np.atleast_2d(datanum)
 
                 # Make the denominator entries monic
@@ -3486,7 +3489,7 @@ def random_state_model(n, p=1, m=1, dt=None, prob_dist=None, stable=True):
 
     # Complex didn't fit, fill the remaining
     if diag_i == n-1:
-        ps = choice([1, -1], 1)
+        ps = choice([1, -1])
         pr = -exp(exp(rand())) if stable else ps*exp(exp(rand()))
         a[diag_i, diag_i] = pr
 
