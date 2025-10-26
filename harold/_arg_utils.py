@@ -1,8 +1,8 @@
 import numpy as np
 from numpy import iscomplexobj, ndarray, asarray
-from scipy.linalg import LinAlgWarning as _rcond_warn
+from scipy.linalg import LinAlgWarning as _rcond_warn  # noqa: F401
 
-__all__ = []
+__all__ = ['_rcond_warn']
 
 
 # These checks, purposefully, do not import State or Transfer objects to
